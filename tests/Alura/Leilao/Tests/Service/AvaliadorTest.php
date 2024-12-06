@@ -85,7 +85,7 @@ class AvaliadorTest extends TestCase
         $this->leiloeiro->avalia($leilao);
 
 
-        
+
     }
 
     /* ------ DADOS ------- */

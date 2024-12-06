@@ -8,13 +8,11 @@ class Leilao
     private $lances;
     /** @var string */
     private $descricao;
-    private $finaliza;
 
     public function __construct(string $descricao)
     {
         $this->descricao = $descricao;
         $this->lances = [];
-        $this->finaliza = false;
     }
 
     public function recebeLance(Lance $lance)
