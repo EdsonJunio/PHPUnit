@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase
 {
+    /** @var Avaliador */
     private $leiloeiro;
 
     protected function setUp(): void
@@ -67,29 +68,27 @@ class AvaliadorTest extends TestCase
 
     public function testLeilaoVazioNaoPodeSerAvaliado()
     {
-            $this->expectException(\DomainException::class);
-            $this->expectExceptionMessage('Não e possível avaliar leilão vazio');
-            $leilao = new Leilao('Camaro Amarelo');
-            $this->leiloeiro->avalia($leilao);
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Não é possível avaliar leilão vazio');
+
+        $leilao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avalia($leilao);
     }
 
-    public function testLeilaoFinalizadoNaoPodeSerAvaliado()
+    public function testLeilaoFinalizadoNaoPodeserAvaliado()
     {
-
         $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('Leilão já finalizado');
-        $leilao = new Leilao('Fiat 147 OKM');
-        $leilao->recebeLance(new Lance(new Usuario('teste'), 2000));
+
+        $leilao = new Leilao('Fiat 147 0KM');
+        $leilao->recebeLance(new Lance(new Usuario('Teste'), 2000));
         $leilao->finaliza();
 
         $this->leiloeiro->avalia($leilao);
-
-
-
     }
 
     /* ------ DADOS ------- */
-    public static function leilaoEmOrdemCrescente()
+    public function leilaoEmOrdemCrescente()
     {
         $leilao = new Leilao('Fiat 147 0KM');
 
@@ -106,7 +105,7 @@ class AvaliadorTest extends TestCase
         ];
     }
 
-    public static function leilaoEmOrdemDecrescente()
+    public function leilaoEmOrdemDecrescente()
     {
         $leilao = new Leilao('Fiat 147 0KM');
 
@@ -123,7 +122,7 @@ class AvaliadorTest extends TestCase
         ];
     }
 
-    public static function leilaoEmOrdemAleatoria()
+    public function leilaoEmOrdemAleatoria()
     {
         $leilao = new Leilao('Fiat 147 0KM');
 
